@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Flight Routes API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project provides a simple API to fetch flight routes between cities, built using **Flask** and **MongoDB**. The API is initialized with dummy data for flights between New Delhi (DEL) and New York City (JFK). 
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+1. **Python 3.7+** installed.
+2. **MongoDB** installed and running locally on port `27017`.
+3. **Flask** and **PyMongo** Python packages installed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### 1. Clone the Repository
+```bash
+    git clone <repository_url>
+    cd <repository_folder>
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    pip install flask pymongo
+    brew tap mongodb/brew
+    brew install mongodb-community@6.0
+    brew services start mongodb/brew/mongodb-community
+    pip install flask pymongo
+    python app.py
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Test the API
+Use the /get-routes endpoint to fetch flight routes. You can test it using a browser, Postman, or curl.
 
-### `npm run build`
+```bash
+curl "http://127.0.0.1:5000/get-routes?source=DEL&destination=JFK"
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Run the Flask Application
+Execute the app.py script to start the application:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+python app.py
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Access the Application
+Open your browser and navigate to http://127.0.0.1:5000 to access the app.
 
-### `npm run eject`
+### 5. Steps to Run the React UI on a CORS-Disabled Browser
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Navigate to the React Project Directory**  
+   Open a terminal or command prompt and change the directory to where your React project is located:
+   ```bash
+   cd <react_project_folder>
+npm ci
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 6. Disable CORS for Your Browser
+Open a CORS-disabled instance of your browser. This is useful when testing locally without dealing with CORS issues.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For Google Chrome:
+Close all open Chrome instances.
+Open a terminal and run the following command to launch Chrome with CORS disabled:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+chrome --disable-web-security --user-data-dir="/tmp/chrome_dev"
+```
 
-## Learn More
+### Step 7: Use the React UI to Search for Routes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Open the React application in your browser (running at [http://localhost:3000](http://localhost:3000)).
+   
+2. Enter the **source** and **destination** cities or airport codes (e.g., "DEL" for New Delhi and "JFK" for New York City) in the input fields provided.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Click on the **Search Route** button to fetch flight route data.
 
-### Code Splitting
+4. The React application will send a request to the backend API (`/get-routes`) and display the available routes in the UI.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+5. Verify that the displayed flight routes match the expected results based on the dummy data.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you encounter any issues, ensure the backend (`app.py`) is running and that MongoDB is active. Check the browser's developer console for any errors or warnings.
